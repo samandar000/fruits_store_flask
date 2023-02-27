@@ -10,7 +10,53 @@ db = GroceryDB()
 @app.route('/grocery')
 def all_grocery():
     """Get all grocery"""
-    pass
+    html = '''
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Grocery</title>
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>My Grocery List</h1>
+        
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Type</th>
+            </tr>
+    '''
+    for grocery in db.all():
+        html += f'''
+        <tr>
+            <td>{grocery["name"]}</td>
+            <td>{grocery["quantity"]}</td>
+            <td>{grocery["price"]}$</td>
+            <td>{grocery["type"]}</td>
+        </tr>
+        
+    '''
+    html += '''
+    </table>
+    
+    </body>
+    </html>
+
+    '''
+    return html
 
 
 # view add grocery
@@ -24,21 +70,155 @@ def add_grocery():
 @app.route('/grocery/type/<type>')
 def all_grocery_by_type(type):
     """Get all grocery by type"""
-    pass
+    html = '''<html>
+    <head>
+        <title>Grocery</title>
 
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>My Grocery List</h1>
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Type</th>
+            </tr>
+
+    '''
+    for grocery in db.get_by_type(type):
+        html += f'''
+        <tr>
+            <td>{grocery["name"]}</td>
+            <td>{grocery["quantity"]}</td>
+            <td>{grocery["price"]}$</td>
+            <td>{grocery['type']}</td>
+        </tr>
+        
+    '''
+    html += '''
+    </table>
+    
+    </body>
+    </html>
+
+    '''
+    return html
 
 # view all grocery by name
 @app.route('/grocery/name/<name>')
 def all_grocery_by_name(name):
     """Get all grocery by name"""
-    pass
+    html = '''<html>
+    <head>
+        <title>Grocery</title>
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>My Grocery List</h1>
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Type</th>
+            </tr>
+
+    '''
+    for grocery in db.get_by_name(name):
+        html += f'''
+        <tr>
+            <td>{grocery["name"]}</td>
+            <td>{grocery["quantity"]}</td>
+            <td>{grocery["price"]}$</td>
+            <td>{grocery['type']}</td>
+        </tr>
+        
+    '''
+    html += '''
+    </table>
+    
+    </body>
+    </html>
+
+    '''
+    return html
 
 
 # view all grocery by price
 @app.route('/grocery/price/<float:price>')
 def all_grocery_by_price(price):
     """Get all grocery by price"""
-    pass
+    html = '''<html>
+    <head>
+        <title>Grocery</title>
+
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>My Grocery List</h1>
+
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Type</th>
+            </tr>
+
+    '''
+    for grocery in db.get_by_price(price):
+        html += f'''
+        <tr>
+            <td>{grocery["name"]}</td>
+            <td>{grocery["quantity"]}</td>
+            <td>{grocery["price"]}$</td>
+            <td>{grocery['type']}</td>
+        </tr>
+        
+    '''
+    html += '''
+    </table>
+    
+    </body>
+    </html>
+
+    '''
+    return html
 
 
 
